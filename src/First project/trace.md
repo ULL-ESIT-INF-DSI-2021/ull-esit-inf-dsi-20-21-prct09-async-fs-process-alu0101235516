@@ -1,4 +1,4 @@
 
-| Nombre | Enlaces |
-| -------|-------- |
-| Hola | Adios |
+| Nombre | Enlaces |   | Nombre | Enlaces |
+| -------|-------- |   | -------|-------- |
+| Hola | Adios |       | Hola | Adios |
