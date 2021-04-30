@@ -7,7 +7,7 @@
 <p>Introducimos el main del programa en la pila, la cual inicialmente es anónima</p><br>
 | LIFO | API | QUEUE | OUTPUT |
 | -----|---- | ----- | ------ |
-| `mainAnonymous()` |  |  |  |
+| `mainAnonymous()` | - | - | - |
 
 <br><b> Second Step </b>
 <p>Tras cargarse las librerias y los argumentos, se pasa el access a la API</p><br>
