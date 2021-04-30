@@ -26,7 +26,7 @@ El callback es añadido a la pila, se invoca y retorna un valor<br>
 | LIFO | API | QUEUE | OUTPUT |
 | ---- | --- | ----- | ------ |
 | `callback()` |  |  |  |
-| `console.log(`Starting to watch file ${filename}`)` |  |  |  |
+| `console.log(Starting to watch file ${filename})` |  |  |  |
 
 <br><b> Sixth Step </b><br>
 Una vez retorna el valor, la llamada sale de la pila<br> 
