@@ -1,5 +1,4 @@
-<p>
-Nombre | Enlaces
--------|--------
-Hola | Adios
-</p>
+
+| Nombre | Enlaces |
+| -------|-------- |
+| Hola | Adios |
