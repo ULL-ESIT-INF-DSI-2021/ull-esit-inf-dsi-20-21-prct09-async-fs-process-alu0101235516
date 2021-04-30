@@ -4,7 +4,6 @@
 |  |  |  |  |
 
 <br><b> First Step </b>
-<p>Introducimos el main del programa en la pila, la cual inicialmente es anónima</p><br>
 | LIFO | API | QUEUE | OUTPUT |
 | ---- | --- | ----- | ------ |
 | mainAnonymous() | - | - | - |
