@@ -1,3 +1,7 @@
+/**
+ * Basic code provided to trace.
+ */
+
 import {access, constants, watch} from 'fs';
 
 if (process.argv.length !== 3) {
