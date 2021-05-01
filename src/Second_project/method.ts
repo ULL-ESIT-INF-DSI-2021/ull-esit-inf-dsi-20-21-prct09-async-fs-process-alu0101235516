@@ -34,9 +34,6 @@ export function infoPipe(fileName: string, option: string) {
 
   if (existDirectory == true) {
     const wc = spawn('wc', [`src/Second_project/Text_notes/${fileName}`]);
-    const echo = spawn('echo', [`src/Second_project/Text_notes/${fileName}`]);
-    echo.stdout.pipe(process.stdout);
-
     let wcOutput = '';
     wc.stdout.on('data', (piece) => wcOutput += piece);
 
@@ -44,13 +41,16 @@ export function infoPipe(fileName: string, option: string) {
       const wcOut = wcOutput.split(/\s+/);
       switch (option) {
         case 'lines':
-          console.log(chalk.green(`File ${fileName} has ${parseInt(wcOut[1]) + 1} lines`));
+          const echoL = spawn('echo', [`File ${fileName} has ${parseInt(wcOut[1]) + 1} lines\n`]);
+          echoL.stdout.pipe(process.stdout);
           break;
         case 'words':
-          console.log(chalk.green(`File ${fileName} has ${wcOut[2]} words`));
+          const echoW = spawn('echo', [`File ${fileName} has ${parseInt(wcOut[2])} words\n`]);
+          echoW.stdout.pipe(process.stdout);
           break;
         case 'characters':
-          console.log(chalk.green(`File ${fileName} has ${wcOut[3]} characters`));
+          const echoC = spawn('echo', [`File ${fileName} has ${parseInt(wcOut[3])} characters\n`]);
+          echoC.stdout.pipe(process.stdout);
           break;
       }
     });
