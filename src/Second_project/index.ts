@@ -1,6 +1,10 @@
 import * as yargs from 'yargs';
 import {info, infoPipe} from './method';
 
+/**
+ * WC comand.
+ */
+
 yargs.command( {
   command: 'wc',
   describe: 'Lines, words and characters count',

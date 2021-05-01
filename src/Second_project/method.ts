@@ -2,6 +2,11 @@ import * as fs from 'fs';
 import * as chalk from 'chalk';
 import {spawn} from 'child_process';
 
+/**
+ * Method without using pipe, giving file information to the user.
+ * @param fileName User file name.
+ * @param option User option wanted.
+ */
 export function info(fileName: string, option: string) {
   const existDirectory: boolean = fs.existsSync(`src/Second_project/Text_notes/${fileName}`);
 
@@ -29,6 +34,11 @@ export function info(fileName: string, option: string) {
   }
 }
 
+/**
+ * Method using pipe, giving file information to the user.
+ * @param fileName User file name.
+ * @param option User option wanted.
+ */
 export function infoPipe(fileName: string, option: string) {
   const existDirectory: boolean = fs.existsSync(`src/Second_project/Text_notes/${fileName}`);
 
