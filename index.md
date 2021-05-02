@@ -3,21 +3,21 @@
 #### ADRIAN HERNANDEZ SUAREZ - alu0101235516@ull.edu.es
 
 
-## _**Introducción.**_
+### _**Introducción.**_
 
   Para llevar a cabo este informe, hemos tenido que realizar 4 ejercicios sobre el manejor de `fs` y `child_process`, en este caso, una aplicación por ejercicio la cual la usaremos para el manejo de ficheros. Como en las anteriores prácticas, hemos hecho uso de un directorio de trabajo, uso de `mocha` y `chai` para los tests y el uso de `TypeDoc` para la documentación.
   Todo esto llevado a cabo con la metodología TDD, y utilizando el trabajo con ficheros gracias a la API síncrona, que nos proporciona **Node.js**. A todo esto, le tenemos que añadir la nueva implementación de `GitHub Actions` y `SonarCLoud`, una para la integración contínua y la otra para la comprobación de calidad y seguridad, respectivamente.
 
-## _**Objetivos.**_
+### _**Objetivos.**_
 
   El objetivo de esta práctica es lograr el correcto diseño y la efiente implementación de 4 ejercicios que ayude a los usuarios a obtener una correcta gestión de ficheros y directorios. Además de familiarizarnos aún más con las herramientas que vamos a usar, como `GitHub Actions` y `SonarCloud`.
 
-## _**Primer paso: Creación de los directorios de trabajo**_
+### _**Primer paso: Creación de los directorios de trabajo**_
 
   Para completar este primer apartado, tendremos que seguir los pasos que se muestran en el siguiente enlace [Creación de un proyecto inicial para trabajar con TypeScript](https://ull-esit-inf-dsi-2021.github.io/typescript-theory/typescript-project-setup.html) con esto lo que conseguiremos será crear un espacio de trabajo ideal para comenzar con el desarrollo de los ejercicios propuestos.
   Cuando tengamos esta parte realizada, tendremos creado un directorio llamado `./src`, en este directorio es donde alojaremos todos los ficheros que vayamos necesitando para la implementación de la práctica.
   
-## _**Segundo paso: Instalación de mocha y chai; Instanbul y Coveralls; GitHub Actions y Sonar Cloud; Además de la configuración de TypeDoc**_
+### _**Segundo paso: Instalación de mocha y chai; Instanbul y Coveralls; GitHub Actions y Sonar Cloud; Además de la configuración de TypeDoc**_
   
   Una vez tengamos hecho el primer paso de esta práctica tendremos que hacer la instalación de TypeDoc, esto es un generador automático de documentación para proyectos de **TypeScript**.  Para conocer mejor esto y seguir la instalación y configuración correctamente, mire el siguiente enlace [Instalación y Configuración de TypeDoc](https://drive.google.com/file/d/19LLLCuWg7u0TjjKz9q8ZhOXgbrKtPUme/view). 
   Cuando tengamos la documentación creada, tendremos que proceder a la instalación de `Mocha` y de `Chai`. Para conocer mejor su funcionamiento y ver la correcta pauta de instalación, siga el siguiente enlace [Instalación y Configuración de Mocha y Chai](https://drive.google.com/file/d/1-z1oNOZP70WBDyhaaUijjHvFtqd6eAmJ/view).
@@ -31,8 +31,8 @@
   
   Cuando tengamos todo esto listo, lo que conseguiremos es hacer un TDD del proyecto, es decir, las pruebas unitarias. Utilizando el comando `npm test` podremos ejecutar dichas pruebas, viendo si la función que hemos creado, es correcta o no. Para dar validez y constancia de esto, tendremos que hacer un commit antes de la realización del código y con el test hecho, viendo como falla dicho test, y luego tendremos que hacer otro commit después de la correcta realización del código para dar constancia de que esta bien realizado.
 
-## _**Tercer paso: Realización de los ejercicios**_
-### _**Ejercicio 1:**_
+### _**Tercer paso: Realización de los ejercicios**_
+#### _**Ejercicio 1:**_
 
 Considerando el siguiente ejemplo de código:
 
@@ -70,7 +70,8 @@ if (process.argv.length !== 3) {
   - ¿Qué hace la función `access`? --> Dicha función lo que hace es verificar que permisos tiene el usuario sobre la ruta especificada.
   - ¿Para qué sirve el objeto `constants`? --> El objeto constants sirve para realizar las operaciones del sistema de archivos, incluso la podemos usar (como veremos posteriormente) para la comprobación de un archivo, es decir, con la constante `O_DIRECTORY` veremos si el archivo en cuestión es un directorio o no.
 
-### _**Ejercicio 2:**_
+
+#### _**Ejercicio 2:**_
  
  Escriba una aplicación que proporcione información sobre el número de líneas, palabras o caracteres que contiene un fichero de texto. La ruta donde se encuentra el fichero debe ser un parámetro pasado a la aplicación desde la línea de comandos.
  
@@ -87,6 +88,33 @@ if (process.argv.length !== 3) {
  Finalmente, para tener una mejor idea de como funciona la aplicación, veremos un ejemplo real de la utilización de la misma, en la siguiente imagen:
  
  ![Comando wc](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct09-async-fs-process-alu0101235516/blob/gh-pages/images/EJ2.png)
+ 
+
+#### _**Ejercicio 3:**_
+ 
+ A partir de la aplicación de procesamiento de notas desarrollada en la Práctica 8, desarrolle una aplicación que reciba desde la línea de comandos el nombre de un usuario de la aplicación de notas, así como la ruta donde se almacenan las notas de dicho usuario. Puede gestionar el paso de parámetros desde la línea de comandos haciendo uso de yargs. La aplicación a desarrollar deberá controlar los cambios realizados sobre todo el directorio especificado al mismo tiempo que dicho usuario interactúa con la aplicación de procesamiento de notas. Nótese que no hace falta modificar absolutamente nada en la aplicación de procesamiento de notas. Es una aplicación que se va a utilizar para provocar cambios en el sistema de ficheros.
+ 
+ Para monitorizar estos cambios, he realizado una función llamada `watch` la cual recibe como parámetros la ruta especificada y el nombre del usuario. Primero veremos si dicha ruta existe, y en el caso de ser cierto pasaremos al monitorizado. Haciendo uso del método `fs.watch()` controlaremos cualquier evento que se ocasione dentro de la ruta especificada.
+ Tenemos dos tipos de eventos, un evento llamado `rename` el cual monitoriza la agregación o el borrado de un fichero y otro evento llamado `change` el cual monitoriza cualquier cambio que se produzca dentro de cualquier fichero dentro de la ruta especificada. 
+ Además también he realizado un comando para poder hacer uso de la aplicación desde la línea de comandos, con el comando `watch` y pasándole la routa y el nombre de usuario. Para ver esto, podemos acceder al siguiente enlace:
+ 
+   - [Función y comando del ejercicio 3](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct09-async-fs-process-alu0101235516/blob/master/src/Third_project/index.ts)
+
+ Finalmente, para tener una mejor idea de como funciona la aplicación, veremos un ejemplo real de la utilización de la misma, en la siguiente imagen:
+ 
+ ![Comando](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct09-async-fs-process-alu0101235516/blob/gh-pages/images/EJ3.png)
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  ### Conclusiones.
 
