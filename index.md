@@ -105,15 +105,26 @@ if (process.argv.length !== 3) {
  ![Comando](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct09-async-fs-process-alu0101235516/blob/gh-pages/images/EJ3.png)
  
  
+ #### _**Ejercicio 4:**_
  
+Desarrolle una aplicación que permita hacer de wrapper de los distintos comandos empleados en Linux para el manejo de ficheros y directorios. Las funciones a implementar, son las siguientes:
+
+  - `function checker` --> Función para checkear si una ruta proporcionada por un usuario es un fichero o un directorio.
+  - `function mkdir` --> Función para la creación de un directorio en una ruta proporcionada por el usuario.
+  - `function ls` --> Función para comprobar el contenido de un directorio proporcionado por el usuario.
+  - `function cat` --> Función para comprobar el contenido de un fichero proporcionado por el usuario.
+  - `function remove` --> Función para eliminar un fichero o un directorio, según decida el usuario.
+  - `function move` --> Función para mover o copiar un fichero/directorio, de una ruta de inicio a otra nueva, las cuales especifica el usuario.
+
+A parte de realizar esto, tendremos que además, realizar un yargs con cada uno de los comandos establecidos en las funciones, los cuales hagan uso de la línea de comandos, para poder verlo de forma más clara, puede acceder a ambos códigos desde los siguientes enlaces:
+
+   - [Funciones del ejercicio 4](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct09-async-fs-process-alu0101235516/blob/master/src/Fourth_project/methods.ts)
  
+   - [Comandos del ejercicio 4](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct09-async-fs-process-alu0101235516/blob/master/src/Fourth_project/index.ts)
+
+ Finalmente, para tener una mejor idea de como funciona la aplicación, veremos un ejemplo real de la utilización de la misma, en la siguiente imagen:
  
- 
- 
- 
- 
- 
- 
+ ![Comando](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct09-async-fs-process-alu0101235516/blob/gh-pages/images/EJ4.png)
  
  
  ### Conclusiones.
