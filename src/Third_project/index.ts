@@ -2,6 +2,11 @@ import * as fs from 'fs';
 import * as chalk from 'chalk';
 import yargs = require("yargs");
 
+/**
+ * Method for check any changes on user´s directory.
+ * @param route database route
+ * @param username user name
+ */
 function watch(route: string, username: string) {
   const dir: string = `${route}/${username}`;
   const file = fs.readdirSync(dir);
@@ -24,6 +29,9 @@ function watch(route: string, username: string) {
   });
 }
 
+/**
+ * Comand watch.
+ */
 yargs.command( {
   command: 'watch',
   describe: 'Watch directory´s files changes',
