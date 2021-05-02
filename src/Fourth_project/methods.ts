@@ -73,7 +73,7 @@ export function cat(route: string) {
       }
     });
   } else {
-    console.error(chalk.red(`${route} route, doesnt exists!`));
+    console.error(chalk.red(`${route} route, doesn´t exists!`));
   }
 }
 
@@ -83,12 +83,40 @@ export function remove(route: string, type: string) {
   if (existFile == true) {
     if (type == "file") {
       fs.rmSync(route);
-      console.log(chalk.green(`${route} file, has been remove!`));
+      console.log(chalk.green(`${route} file, has been removed!`));
     } else if (type == "directory") {
       fs.rmdirSync(route);
-      console.log(chalk.green(`${route} directory, has been remove!`));
+      console.log(chalk.green(`${route} directory, has been removed!`));
     }
   } else {
-    console.error(chalk.red(`${route} route, doesnt exists!`));
+    console.error(chalk.red(`${route} route, doesn´t exists!`));
+  }
+}
+
+export function move(routeO: string, routeF: string, option: string) {
+  const existFileO: boolean = fs.existsSync(`${routeO}`);
+  const existFileF: boolean = fs.existsSync(`${routeF}`);
+
+  if (existFileO == true && existFileF == true) {
+    switch (option) {
+      case 'move':
+        const mv = spawn('mv', [routeO, routeF]);
+        mv.on('close', () => {
+          console.log(chalk.green(`File ${routeO} has been moved!`));
+        });
+        break;
+      case 'copy':
+        const cp = spawn('cp', [routeO, routeF]);
+        cp.on('close', () => {
+          console.log(chalk.green(`File ${routeO} has been copied!`));
+        });
+        break;
+    }
+  } else {
+    if (existFileO == true && existFileF == false) {
+      console.error(chalk.red(`${routeF} route, doesn´t exists!`));
+    } else {
+      console.error(chalk.red(`${routeO} route, doesn´t exists!`));
+    }
   }
 }
