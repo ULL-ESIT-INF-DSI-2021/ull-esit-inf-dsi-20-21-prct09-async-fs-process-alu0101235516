@@ -1,0 +1,1 @@
+En el fichero **trace.md** puede ver la traza realizada sobre el código proporcionado por el profesorado, el cual se encuentra en el fichero **index.ts**.
