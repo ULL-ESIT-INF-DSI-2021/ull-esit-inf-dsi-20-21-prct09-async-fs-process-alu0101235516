@@ -13,9 +13,9 @@ export class User {
    * @param username nombre de usuario, del usuario correspondiente
    */
   constructor(private username: string) {
-    const existDirectory: boolean = fs.existsSync(`src/Database/${this.username}`);
+    const existDirectory: boolean = fs.existsSync(`src/Third_project/Project_8/Database/${this.username}`);
     if (existDirectory == false) {
-      fs.mkdir(`src/Database/${this.username}`, () => {
+      fs.mkdir(`src/Third_project/Project_8/Database/${this.username}`, () => {
         console.log(chalk.green('New User Directory created!'));
       });
     }
@@ -52,11 +52,11 @@ export class User {
    * @param color color de la nota.
    */
   public addNote(title: string, body: string, color: 'red' | 'blue' | 'yellow' | 'green') {
-    const existFile: boolean = fs.existsSync(`src/Database/${this.username}/${title}.json`);
+    const existFile: boolean = fs.existsSync(`src/Third_project/Project_8/Database/${this.username}/${title}.json`);
 
     if (existFile == false) {
       this.userNotes.push(new Note(title, body, color));
-      fs.writeFile(`src/Database/${this.username}/${title}.json`, `${jsonFormat(title, body, color)}`, () => {
+      fs.writeFile(`src/Third_project/Project_8/Database/${this.username}/${title}.json`, `${jsonFormat(title, body, color)}`, () => {
         console.log(chalk.green('New note added!'));
       });
     } else {
@@ -70,10 +70,10 @@ export class User {
    * @param title titulo de la nota.
    */
   public removeNote(title: string) {
-    const existFile: boolean = fs.existsSync(`src/Database/${this.username}/${title}.json`);
+    const existFile: boolean = fs.existsSync(`src/Third_project/Project_8/Database/${this.username}/${title}.json`);
 
     if (existFile == true) {
-      fs.rm(`src/Database/${this.username}/${title}.json`, () => {
+      fs.rm(`src/Third_project/Project_8/Database/${this.username}/${title}.json`, () => {
         console.log(chalk.green(`${title} note, has been remove!`));
       });
     } else {
@@ -89,26 +89,26 @@ export class User {
    * @param valParam El nuevo valor del parámetro
    */
   public modifyNote(title: string, newParam: string, valParam: string) {
-    const existFile: boolean = fs.existsSync(`src/Database/${this.username}/${title}.json`);
+    const existFile: boolean = fs.existsSync(`src/Third_project/Project_8/Database/${this.username}/${title}.json`);
 
     if (existFile == true) {
-      const noteContent = fs.readFileSync(`src/Database/${this.username}/${title}.json`);
+      const noteContent = fs.readFileSync(`src/Third_project/Project_8/Database/${this.username}/${title}.json`);
       const data = JSON.parse(noteContent.toString());
 
       switch (newParam) {
         case "title":
-          fs.renameSync(`src/Database/${this.username}/${title}.json`, `src/Database/${this.username}/${valParam}.json`);
-          fs.writeFile(`src/Database/${this.username}/${valParam}.json`, `${jsonFormat(valParam, data.body, data.color)}`, () => {
+          fs.renameSync(`src/Third_project/Project_8/Database/${this.username}/${title}.json`, `src/Third_project/Project_8/Database/${this.username}/${valParam}.json`);
+          fs.writeFile(`src/Third_project/Project_8/Database/${this.username}/${valParam}.json`, `${jsonFormat(valParam, data.body, data.color)}`, () => {
             console.log(chalk.green('New title asigned!'));
           });
           break;
         case "body":
-          fs.writeFile(`src/Database/${this.username}/${data.title}.json`, `${jsonFormat(data.title, valParam, data.color)}`, () => {
+          fs.writeFile(`src/Third_project/Project_8/Database/${this.username}/${data.title}.json`, `${jsonFormat(data.title, valParam, data.color)}`, () => {
             console.log(chalk.green('New body asigned!'));
           });
           break;
         case "color":
-          fs.writeFile(`src/Database/${this.username}/${data.title}.json`, `${jsonFormat(data.title, data.body, valParam)}`, () => {
+          fs.writeFile(`src/Third_project/Project_8/Database/${this.username}/${data.title}.json`, `${jsonFormat(data.title, data.body, valParam)}`, () => {
             console.log(chalk.green('New color asigned!'));
           });
           break;
@@ -124,10 +124,10 @@ export class User {
    * @param title El titulo de la nota que queremos leer
    */
   public readNote(title: string) {
-    const existFile: boolean = fs.existsSync(`src/Database/${this.username}/${title}.json`);
+    const existFile: boolean = fs.existsSync(`src/Third_project/Project_8/Database/${this.username}/${title}.json`);
 
     if (existFile == true) {
-      const noteContent = fs.readFileSync(`src/Database/${this.username}/${title}.json`);
+      const noteContent = fs.readFileSync(`src/Third_project/Project_8/Database/${this.username}/${title}.json`);
       const data = JSON.parse(noteContent.toString());
 
       switch (data.color) {
@@ -162,14 +162,14 @@ export class User {
    * Método para listar todas las notas de un usuario
    */
   public listNotes() {
-    const existFile: boolean = fs.existsSync(`src/Database/${this.username}`);
+    const existFile: boolean = fs.existsSync(`src/Third_project/Project_8/Database/${this.username}`);
 
     if (existFile == true) {
       console.log(chalk.blue(`¡Notas de ${this.username}!`));
       console.log('------------------');
 
-      fs.readdirSync(`src/Database/${this.username}`).forEach((item) => {
-        const userContent = fs.readFileSync(`src/Database/${this.username}/${item}`);
+      fs.readdirSync(`src/Third_project/Project_8/Database/${this.username}`).forEach((item) => {
+        const userContent = fs.readFileSync(`src/Third_project/Project_8/Database/${this.username}/${item}`);
         const data = JSON.parse(userContent.toString());
 
         switch (data.color) {
