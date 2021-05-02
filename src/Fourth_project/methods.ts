@@ -43,6 +43,10 @@ export function mkdir(route: string, dirName: string) {
   }
 }
 
+/**
+ * Method that checks directory´s files.
+ * @param route Route where the directory is.
+ */
 export function ls(route: string) {
   const existRoute: boolean = fs.existsSync(`${route}`);
 
@@ -60,6 +64,10 @@ export function ls(route: string) {
   }
 }
 
+/**
+ * Method that checks file´s content.
+ * @param route Route where the file is.
+ */
 export function cat(route: string) {
   const existRoute: boolean = fs.existsSync(`${route}`);
 
@@ -77,6 +85,11 @@ export function cat(route: string) {
   }
 }
 
+/**
+ * Method that remove a file or a directory
+ * @param route Route where the file is
+ * @param type Type of file
+ */
 export function remove(route: string, type: string) {
   const existFile: boolean = fs.existsSync(`${route}`);
 
@@ -95,6 +108,12 @@ export function remove(route: string, type: string) {
   }
 }
 
+/**
+ * Method that moves a file or a directory to another route
+ * @param routeO Initial file route
+ * @param routeF Final file route
+ * @param option Type of move (move or copy)
+ */
 export function move(routeO: string, routeF: string, option: string) {
   const existFileO: boolean = fs.existsSync(`${routeO}`);
   const existFileF: boolean = fs.existsSync(`${routeF}`);

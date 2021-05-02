@@ -2,7 +2,7 @@ import * as yargs from 'yargs';
 import {checker, mkdir, ls, cat, remove, move} from './methods';
 
 /**
- * Check comand.
+ * Check command.
  */
 
 yargs.command( {
@@ -23,7 +23,7 @@ yargs.command( {
 });
 
 /**
- * Mkdir comand.
+ * Mkdir command.
  */
 yargs.command( {
   command: 'mkdir',
@@ -47,6 +47,9 @@ yargs.command( {
   },
 });
 
+/**
+ * ls command
+ */
 yargs.command( {
   command: 'ls',
   describe: 'List a directory´s files',
@@ -64,6 +67,9 @@ yargs.command( {
   },
 });
 
+/**
+ * Cat command
+ */
 yargs.command( {
   command: 'cat',
   describe: 'List a directory´s files',
@@ -81,6 +87,9 @@ yargs.command( {
   },
 });
 
+/**
+ * Remove command
+ */
 yargs.command( {
   command: 'remove',
   describe: 'List a directory´s files',
@@ -103,6 +112,9 @@ yargs.command( {
   },
 });
 
+/**
+ * Move and copy command
+ */
 yargs.command( {
   command: 'move',
   describe: 'List a directory´s files',
