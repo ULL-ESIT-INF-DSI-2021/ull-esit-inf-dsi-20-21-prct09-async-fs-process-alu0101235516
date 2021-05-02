@@ -85,8 +85,10 @@ export function remove(route: string, type: string) {
       fs.rmSync(route);
       console.log(chalk.green(`${route} file, has been removed!`));
     } else if (type == "directory") {
-      fs.rmdirSync(route);
-      console.log(chalk.green(`${route} directory, has been removed!`));
+      const rm = spawn('rm', ['-rf', route]);
+      rm.on('close', () => {
+        console.log(chalk.green(`${route} directory, has been removed!`));
+      });
     }
   } else {
     console.error(chalk.red(`${route} route, doesn´t exists!`));
