@@ -8,25 +8,35 @@ import yargs = require("yargs");
  * @param username user name
  */
 function watch(route: string, username: string) {
+  const existRoute: boolean = fs.existsSync(`${route}/${username}`);
   const dir: string = `${route}/${username}`;
   const file = fs.readdirSync(dir);
 
-  console.log(chalk.blue(`This it´s the initial content in the direcotry: \n` + file + '\n'));
+  if (existRoute == true) {
+    console.log(chalk.blue(`This it´s the initial content in the direcotry: \n` + file + '\n'));
 
-  fs.watch(dir, (event, trigger) => {
-    console.log('The directory as changed!');
-    switch (event) {
-      case 'rename':
-        console.log(chalk.green('File ' + trigger + ' has been added or removed!\n'));
-        break;
-      case 'change':
-        console.log(chalk.green('There was a change at ' + trigger + '\n'));
-        break;
-    }
+    fs.watch(dir, (event, trigger) => {
+      console.log('The directory as changed!');
+      switch (event) {
+        case 'rename':
+          const existFile: boolean = fs.existsSync(`${route}/${username}/${trigger}`);
+          if (existFile == true) {
+            console.log(chalk.green('File ' + trigger + ' has been added!\n'));
+          } else {
+            console.log(chalk.green('File ' + trigger + ' has been removed!\n'));
+          }
+          break;
+        case 'change':
+          console.log(chalk.green('There was a change at ' + trigger + '\n'));
+          break;
+      }
 
-    const file = fs.readdirSync(dir);
-    console.log(chalk.blue(`The directory now contains: \n` + file + '\n'));
-  });
+      const file = fs.readdirSync(dir);
+      console.log(chalk.blue(`The directory now contains: \n` + file + '\n'));
+    });
+  } else {
+    console.error(chalk.red(`${route} route, doesn´t exists!`));
+  }
 }
 
 /**
