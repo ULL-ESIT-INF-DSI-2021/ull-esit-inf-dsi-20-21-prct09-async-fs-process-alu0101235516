@@ -86,7 +86,7 @@ if (process.argv.length !== 3) {
 
  Finalmente, para tener una mejor idea de como funciona la aplicación, veremos un ejemplo real de la utilización de la misma, en la siguiente imagen:
  
- [!Comando wc](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct09-async-fs-process-alu0101235516/blob/gh-pages/images/EJ2.png)
+ ![Comando wc](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct09-async-fs-process-alu0101235516/blob/gh-pages/images/EJ2.png)
  
  ### Conclusiones.
 
