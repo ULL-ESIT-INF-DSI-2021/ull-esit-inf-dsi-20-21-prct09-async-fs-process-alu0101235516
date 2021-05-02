@@ -34,75 +34,59 @@
 ## _**Tercer paso: Realización de los ejercicios**_
 ### _**Ejercicio 1:**_
 
-Los requisitos que debe cumplir la aplicación de procesamiento de notas de texto, los podremos observar [aquí](https://ull-esit-inf-dsi-2021.github.io/prct08-filesystem-notes-app/). La estructura que he decidido tener para la realización de la práctica es la siguiente:
+Considerando el siguiente ejemplo de código:
 
- Tendremos un directorio principal llamado `/src` en el cual alojaremos todos los ficheros que contiene nuestra aplicación, cada fichero, para tenerlo mejor ordenador, lo he guardado en un directorio diferentes, según su función. Esto es que, tenemos por un lado el directorio `Database` el cual se dedicará a almacenar las notas de los usuarios, un directorio `Notes` el cual se dedica a almacenar el fichero `notes.ts` el cual contiene la clase Note, que explicaremos posteriormente y por otro lado, tenemos un directorio llamado `Users` el cual almacena el fichero con la clase `User`. Finalmente, en nuestro directorio principal `src`, tenemos un fichero llamado `index.ts` el cual es el corazon de nuestra aplicación, ya que ahí se encontrarán todos los comandos de ejecución de nuestro código.
- 
- Cabe destacar que también se debe aportar la documentación mediante el uso de TypeDoc y usar una metodología de desarrollo dirigido por pruebas/comportamiento. El código fuente de las pruebas deberá estar alojado en un fichero `index.spec.ts` dentro del directorio `tests`.
+```typescript
+  import {access, constants, watch} from 'fs';
 
-  **La clase Note**
+if (process.argv.length !== 3) {
+  console.log('Please, specify a file');
+} else {
+  const filename = process.argv[2];
 
-  La clase `Note`, es una representación de una nota, es decir, contiene todos los valores que una nota debería tener. Dentro de esta clase, podemos encontrar varios métodos, la gran mayoría dirigidos al manejo y acceso de los atributos privados, los cuales son:
+  access(filename, constants.F_OK, (err) => {
+    if (err) {
+      console.log(`File ${filename} does not exist`);
+    } else {
+      console.log(`Starting to watch file ${filename}`);
+
+      const watcher = watch(process.argv[2]);
+
+      watcher.on('change', () => {
+        console.log(`File ${filename} has been modified somehow`);
+      });
+
+      console.log(`File ${filename} is no longer watched`);
+    }
+  });
+}
+```
+  Tendremos que realizar una traza de la ejecución del programa, la cual se realizará paso a paso mostrando el contenido de la pila de llamadas, la API, la cola de manejadores y la salida por pantalla. Todo esto, dando por hecho que se realizan 2 modificaciones del fichero `helloworld.txt` durante la ejecución del mismo. Para ver dicha traza, accede por el siguiente enlace:
   
-  - `title`: Titulo de la nota.
-  - `body`: Cuerpo o mensaje de la nota.
-  - `color`: Color que tiene la nota.
- 
- Los métodos que tiene mi clase `Note`, son:
- 
-  - `getTitle()`: Método para acceder al título de la nota.
-  - `setTitle(newTitle: string)`: Método para cambiar el título de la nota.
-  - `getBody()`: Método para acceder al cuerpo de la nota.
-  - `setBody(newBody: string)`: Método para cambiar el cuerpo de la nota.
-  - `getColor()`: Método para acceder al color de la nota.
-  - `setColor(newColor: 'red' | 'blue' | 'yellow' | 'green')`: Método para cambiar el color de la nota.
-
-  Para ver el código en más profundidad, y con mejor claridad, vaya al siguiente enlace, [Clase Note](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101235516/blob/master/src/Notes/note.ts).
+  - [TRAZA DEL EJERCICIO 1](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct09-async-fs-process-alu0101235516/blob/master/src/First_project/trace.md)
+  
+  Después de esto, tendremos que realizar/responder dos preguntas que se nos plantean:
+  
+  - ¿Qué hace la función `access`? --> Dicha función lo que hace es verificar que permisos tiene el usuario sobre la ruta especificada.
+  - ¿Para qué sirve el objeto `constants`? --> El objeto constants sirve para realizar las operaciones del sistema de archivos, incluso la podemos usar (como veremos posteriormente) para la comprobación de un archivo, es decir, con la constante `O_DIRECTORY` veremos si el archivo en cuestión es un directorio o no.
 
 ### _**Ejercicio 2:**_
-  
-  La clase `User`, es una representación de los usuarios, es decir, en esta clase, nos encontraremos con todos los métodos necesarios para que un usuario pueda añadir, modificar, eliminar, o si quiere, listar todas las notas que tiene y leer su contenido. Esta clase, esta realizada con el fin de gestionar el directorio del usuario, según como se desee, para ello hacemos uso de los siguientes parámetros:
-  
-  - `username`: Nombre de usuario.
-  - `userNotes`: Un array que contiene las notas del usuario.
  
- Los métodos que tiene mi clase `User`, son:
+ Escriba una aplicación que proporcione información sobre el número de líneas, palabras o caracteres que contiene un fichero de texto. La ruta donde se encuentra el fichero debe ser un parámetro pasado a la aplicación desde la línea de comandos.
  
-  - `getUsername()`: Método para acceder al nombre del usuario.
-  - `setUsername(newUsername: string)`: Método para cambiar el nombre del usuario.
-  - `getNotes()`: Método para acceder a las notas del usuario.
-  - `addNote(title: string, body: string, color: 'red' | 'blue' | 'yellow' | 'green')`: Método para que un usuario pueda crear una nueva nota dentro de su directorio, esta tendra como nombre, el que le ponga en el título.
-  - `removeNote(title: string)`: Método para que un usuario pueda eliminar una nota dentro de su directorio, según el titulo que facilite el usuario, se eliminará.
-  - `modifyNote(title: string, newParam: string, valParam: string)`: Método para modificar una nota del usuario, para ello, seleccionaremos el titulo de la nota a modificar, el nuevo parametro que queremos modificar y por lo que lo queremos sustituir.
-  - `readNote(title: string)`: Método para leer el contenido de una nota que coincida con el titulo que facilita el usuario.
-  - `listNote()`: Método para mostrar el título de todas las notas que tiene el usuario.
-
-Por fuera de la clase, pero dentro del mismo fichero, tenemos una función externa, la cual la usamos para poner en formato JSON el contenido de las notas, esta función se llama `jsonFormat(title: string, body: string, color: string)`.
-
-  Para ver el código en más profundidad, y con mejor claridad, vaya al siguiente enlace, [Clase User](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101235516/blob/master/src/Users/users.ts).
+ En este ejercicio, hemos realizado dos funciones diferentes, una haciendo uso del método `pipe` y otra sin hacer uso del mismo, además de implementar dicha aplicación haciendo uso de la línea de comandos. Los códigos para ambas funciones las podemos ver aquí:
  
-   **Aqui tenemos la salida del código ejecutando el `npm run test`**
-  
- ![Tests](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101235516/blob/gh-pages/images/test.png)
+  - [Funciones implementadas](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct09-async-fs-process-alu0101235516/blob/master/src/Second_project/method.ts)
  
-### _**Ejercicio 3:**_
-  
- ![Codigo](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101235516/blob/gh-pages/images/coverage.png)
+ Ambas funciones tienen como parámetros el nombre del fichero y la opción elegida, es decir, si quieres que la aplicación funcione con pipe o sin pipe, además, utilizamos el método `spawn` para hacer uso del comando `wc` original de **bash**, el cual, saca un vector diciendo el número de líneas, el número de palabras, el número de caracteres y el nombre con extensión del fichero, aunque este último no lo usaremos.
  
+ Para la implementación de `yargs` haremos que desde la línea de comandos le pasemos el nombre del archivo y luego las opciones que queremos, en la forma y orden que el usuario desee. Para poder ver esto de mejor manera, entre en el siguiente enlace:
  
-### _**Ejercicio 4:**_
+   - [Comando wc](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct09-async-fs-process-alu0101235516/blob/master/src/Second_project/index.ts)
 
-Una vez creadas las clases, se pasará a crear la aplicación. En esta lo que se ha hecho es que a través de yargs se han añadido los siguientes comandos:
-
-  - `add`: Añade una nota al usuario, se le tiene que pasar como parámetros el usuario `--user="usuario"`, el título de la nota `--title="Título"`, el cuerpo de la nota  `--body="Cuerpo"` y el color de la nota, que se pueden poner 4 colores, red, blue, green o yellow `--color="blue"`.
-  - `modify`: Modifica un parámetro concreto de una nota, se le tiene que pasar como parámetro obligatoriamente el usuario `--user="usuario"` y el título de la nota `--title="Título"` y opcionalmente el nuevo valor del campo que se quiere cambiar, el título `--newTitle="Nuevo Título"`, el cuerpo `--newBody="Nuevo Cuerpo"` o el color `--newColor="red"`.
-  - `remove`: Borra una nota concreta al usuario, se le tiene que pasar como parámetros el usuario `--user="usuario"` y el título de la nota `--title="Título"`.
-  - `list`: Lista los títulos de las notas de los usuarios, se le tiene que pasar como parámetro el usuario `--user="usuario"`.
-  - `read`: Lee una nota concreta al usuario, se le tiene que pasar como parámetros el usuario `--user="usuario"` y el título de la nota `--title="Título"`.
-
-Finalmente, para realizar las pruebas, tendremos que introducir en la terminar `node (ruta del archivo en dist) (comando) (parametros del comando)`, tal y como podemos ver en la siguiente imagen:
-
- ![Comandos](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101235516/blob/gh-pages/images/comandos.png)
+ Finalmente, para tener una mejor idea de como funciona la aplicación, veremos un ejemplo real de la utilización de la misma, en la siguiente imagen:
+ 
+ [!Comando wc](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct09-async-fs-process-alu0101235516/blob/gh-pages/images/EJ2.png)
  
  ### Conclusiones.
 
