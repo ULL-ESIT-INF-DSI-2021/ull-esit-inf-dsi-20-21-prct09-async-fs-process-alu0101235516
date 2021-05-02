@@ -129,7 +129,7 @@ A parte de realizar esto, tendremos que además, realizar un yargs con cada uno 
  
  ### Conclusiones.
 
-  Para concluir, creo que la práctica ha estado divertida, y ha sido productiva, ha sido interesante el uso del chalk y el del yargs, ambas herramientas, creo que dan un punto de partida a las aplicaciones bastante buena, a partir de ahora, implementando esto y lo que ya hemos aprendido, creo que podremos hacer mejores proyectos. Poco a poco me estoy dando cuenta que me gusta más trabajar con ts o js, y pienso que es un lenguaje muy ágil y flexible.
+  Para concluir, creo que la práctica ha estado divertida, y ha sido productiva, ha sido interesante el uso de la API, el fs y el spawn, todas estas herramientas, creo que dan un punto de partida a las aplicaciones bastante buena, a partir de ahora, implementando esto y lo que ya hemos aprendido, creo que podremos hacer mejores proyectos. Poco a poco me estoy dando cuenta que me gusta más trabajar con ts o js, y pienso que es un lenguaje muy ágil y flexible.
 
 
 ### _**Bibliografía.**_
